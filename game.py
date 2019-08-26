@@ -1,4 +1,4 @@
-
+from map import *
 import pygame as pg
 import math
 
@@ -13,6 +13,8 @@ class Game:
         self.clock = pg.time.Clock()
         self.rect = self.screen.get_rect()
         self.running = True
+        self.gamemap = Map()
+        self.tick = 0
 
     def new(self):
         #start a new game
@@ -30,7 +32,10 @@ class Game:
 
     def update(self):
         #TODO Blocks falling
-        pass
+        self.tick += 1
+        if self.tick > 120:
+            self.gamemap.update()
+            self.tick = 0
 
     def events(self):
         #TODO Keybinds for blocks rotating
@@ -43,12 +48,16 @@ class Game:
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE and self.playing:
                     self.playing = False
+                if event.key == pg.K_S:
+                    self.gamemap.tryMoveDown()
+                    
     def draw(self):
         # drawing the screen
         self.screen.fill((0, 0, 0))
-        self.debug_lines(self.screen)
+        #self.debug_lines(self.screen)
         self.draw_frame(self.screen)
-        self.fillcoord(self.screen, (9,19), (255, 0, 0))
+        #self.fillcoord(self.screen, (9,19), (255, 0, 0))
+        self.drawmap(self.screen)
 
     def debug_lines(self, screen):
         for x in range((self.width - 100) // self.tilesize + 1):
@@ -76,6 +85,21 @@ class Game:
         x = coord[0]
         y = coord[1] 
         pg.draw.rect(screen, color, (x, y, 40, 40))
+
+    def drawmap(self, screen):
+        for y in range(len(self.gamemap.map)):
+            for x in range(len(self.gamemap.map[y])):
+                color = self.gamemap.map[y][x]
+                if color == '':
+                    continue
+                self.fillcoord(screen, (x,y), (255, 0, 0))
+                #print(coords)
+               
+                
+
+
+
+
 
 
 

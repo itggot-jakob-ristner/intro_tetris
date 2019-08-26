@@ -5,7 +5,7 @@ mapHeight = 20
 class Map:
     def __init__(self):
         self.blockX = 1
-        self.blockY = 15
+        self.blockY = 1
         self.block = [
                             ['', 'r'],
                             ['', 'r'],
@@ -75,12 +75,6 @@ class Map:
         self.forTileInBlock(self.placeTile)
 
     def update(self):
-        if random.random()>0.5:
-            if random.random()>0.9:
-                self.tryMoveRight()
-            else:
-                self.tryMoveLeft()
-
         self.tryMoveDown()
         
     def prettyPrint(self):
