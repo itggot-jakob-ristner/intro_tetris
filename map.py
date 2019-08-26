@@ -94,9 +94,10 @@ class Map:
             print()
         print()
 
-m = Map()
-m.prettyPrint()
-while(True):
-    m.update()
+if __name__ == "__main__":
+    m = Map()
     m.prettyPrint()
-    time.sleep(1)
+    while(True):
+        m.update()
+        m.prettyPrint()
+        time.sleep(1)
