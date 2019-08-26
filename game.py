@@ -48,6 +48,7 @@ class Game:
         self.screen.fill((0, 0, 0))
         self.debug_lines(self.screen)
         self.draw_frame(self.screen)
+        self.fillcoord(self.screen, (9,19), (255, 0, 0))
 
     def debug_lines(self, screen):
         for x in range((self.width - 100) // self.tilesize + 1):
@@ -58,4 +59,30 @@ class Game:
     def draw_frame(self, screen):
         #top frame
         pg.draw.line(screen, (255, 255, 255), (50, 50), (self.width - 50, 50), 4)
+        pg.draw.line(screen, (255, 255, 255), (50, self.height - 50), (self.width - 50, self.height - 50), 4)
+
+        pg.draw.line(screen, (255, 255, 255), (50, 50), (50, self.height - 50), 4)
+        pg.draw.line(screen, (255, 255, 255), (self.width - 50, 50), (self.width - 50, self.height - 50), 4)
+
+    def coordtoscreen(self, coord):
+        # y coord to top left coord
+        x = 10 + 40 * (coord[0] + 1)
+        y = 10 + 40 * (coord[1] + 1)
+
+        return (x, y)
+    
+    def fillcoord(self, screen, coord, color):
+        coord = self.coordtoscreen(coord)
+        x = coord[0]
+        y = coord[1] 
+        pg.draw.rect(screen, color, (x, y, 40, 40))
+
+
+
+
+
+
+
+
+
 
