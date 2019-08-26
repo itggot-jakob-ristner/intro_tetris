@@ -15,6 +15,11 @@ class Game:
         self.running = True
         self.gamemap = Map()
         self.tick = 0
+        self.colordict = {
+                "r" : (255, 0, 0),
+                "g" : (0, 255, 0),
+                "b" : (0, 0, 255)
+                }
 
     def new(self):
         #start a new game
@@ -48,13 +53,13 @@ class Game:
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE and self.playing:
                     self.playing = False
-                if event.key == pg.K_S:
+                if event.key == pg.K_s:
                     self.gamemap.tryMoveDown()
                     
     def draw(self):
         # drawing the screen
         self.screen.fill((0, 0, 0))
-        #self.debug_lines(self.screen)
+        self.debug_lines(self.screen)
         self.draw_frame(self.screen)
         #self.fillcoord(self.screen, (9,19), (255, 0, 0))
         self.drawmap(self.screen)
@@ -89,10 +94,11 @@ class Game:
     def drawmap(self, screen):
         for y in range(len(self.gamemap.map)):
             for x in range(len(self.gamemap.map[y])):
-                color = self.gamemap.map[y][x]
-                if color == '':
+                colorstring = self.gamemap.map[y][x]
+                if colorstring == '':
                     continue
-                self.fillcoord(screen, (x,y), (255, 0, 0))
+                color = self.colordict[colorstring]
+                self.fillcoord(screen, (x,y), color)
                 #print(coords)
                
                 
