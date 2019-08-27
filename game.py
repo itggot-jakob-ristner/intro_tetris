@@ -92,9 +92,9 @@ class Game:
         pg.draw.rect(screen, color, (x, y, 40, 40))
 
     def drawmap(self, screen):
-        for y in range(len(self.gamemap.map)):
-            for x in range(len(self.gamemap.map[y])):
-                colorstring = self.gamemap.map[y][x]
+        for y in range(len(self.gamemap.getMap())):
+            for x in range(len(self.gamemap.getMap()[y])):
+                colorstring = self.gamemap.getMap()[y][x]
                 if colorstring == '':
                     continue
                 color = self.colordict[colorstring]
